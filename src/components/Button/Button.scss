@@ -1,0 +1,49 @@
+@import '../../../assets/sass/abstracts/variables';
+
+.btn {
+  &,
+  &:link,
+  &:visited {
+    display: inline-block;
+    font-weight: 700;
+    font-size: $default-font-size;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0.2rem 3rem;
+    transition: all 0.2s;
+    border: none;
+    background-color: transparent;
+    line-height: inherit;
+  }
+
+  &--primary {
+    color: $color-primary;
+
+    &:hover,
+    &:active {
+      background-color: $color-primary;
+      color: $color-white;
+    }
+  }
+
+  &--secondary {
+    color: $color-white;
+    background-color: $color-primary-dark;
+
+    &:hover,
+    &:active {
+      background-color: $color-primary-light-2;
+      color: $color-primary;
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+    border-radius: 3px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

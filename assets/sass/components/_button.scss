@@ -1,0 +1,46 @@
+.btn {
+  &,
+  &:link,
+  &:visited {
+    display: inline-block;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer; 
+    padding: 0.5rem 3rem;
+    transition: all 0.2s;
+
+    //Change for the <button> element
+    border: none;
+  }
+
+  &--white {
+    color: $color-primary;
+
+    &:hover,
+    &:active {
+      background-color: $color-primary;
+      color: $color-white;
+    }
+  }
+
+  &--black {
+    color: $color-white;
+    background-color: $color-primary-dark;
+
+    &:hover,
+    &:active {
+      background-color: $color-primary-light-2;
+      color: $color-primary;
+    }
+  }
+  
+  &:active {
+    transform: translateY(1px);
+    border-radius: 3px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

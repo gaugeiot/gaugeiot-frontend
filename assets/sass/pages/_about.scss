@@ -1,0 +1,42 @@
+.about{
+  grid-area: main;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'intro skill';
+
+  @include respond(bp-small) {  
+    grid-template-rows: 1fr 1fr;  
+    grid-template-columns: 1fr;
+    grid-template-areas: 'intro' 
+                         'skill';
+  }
+
+}
+
+.presentation {
+  display: flex;
+  flex-flow: column;
+  justify-items: center;
+  align-items: center;
+  margin-right: 2rem;
+
+  @include respond(bp-small) {  
+    margin-right: 0;
+    padding: 1rem 1rem;
+  }
+
+  & > p {
+    text-align: justify;
+
+    &:not(:last-of-type){
+      margin-bottom: 1rem;
+    }
+
+    &:first-of-type {
+      margin-top: 2rem;
+    }
+    
+  }
+
+} 
