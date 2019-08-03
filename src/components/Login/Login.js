@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { getState } from '../StateProvider/StateProvider';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -35,6 +37,9 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
   const classes = useStyles();
+  const [{ user }, dispatch] = getState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const authenticate = () => {
     //TODO: get token from server
@@ -42,7 +47,16 @@ const Login = () => {
     //TODO : redirect to original page
     //TODO: remove fake authentication
     console.log('Fake authentication');
+    if (email === 'gaugeiot' && password === 'gaugeiot') {
+      dispatch({ type: 'AuthenticateUser' });
+      // setEmail('');
+      // setPassword('');
+    }
   };
+
+  if (user.isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -65,6 +79,10 @@ const Login = () => {
             name='email'
             autoComplete='email'
             autoFocus
+            value={email}
+            onChange={e => {
+              setEmail(e.target.value);
+            }}
           />
           <TextField
             variant='outlined'
@@ -76,6 +94,10 @@ const Login = () => {
             type='password'
             id='password'
             autoComplete='current-password'
+            value={password}
+            onChange={e => {
+              setPassword(e.target.value);
+            }}
           />
           <FormControlLabel
             control={<Checkbox value='remember' color='primary' />}
