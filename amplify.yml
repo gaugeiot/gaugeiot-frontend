@@ -3,7 +3,7 @@ frontend:
   phases:
     build:
       commands:
-        - npm install --only=dev
+        - npm install --only=devnpm
         - npm install
         - npm run build
   artifacts:

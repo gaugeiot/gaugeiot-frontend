@@ -1,53 +1,15 @@
 import React from 'react';
-
-import Box from '@material-ui/core/Box';
-import { grey } from '@material-ui/core/colors';
-import TemperatureCardContainer from './TemperatureCard/index';
+import Dashaboard from './Dashboard/Dashboard';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import ProtectedRouter from './ProtectedRouter/ProtectedRouter';
+import Login from './Login/Login';
 
 const App = () => {
   return (
-    <>
-      <Box
-        display='flex'
-        flexWrap='wrap'
-        alignItems='flex-start'
-        // bgcolor={grey[900]}
-        justifyContent='center'
-      >
-        <TemperatureCardContainer
-          name='Sala de Jantar'
-          temp={14.11}
-          mintemp={1.0}
-          maxtemp={19.0}
-          unit='C'
-          conn={true}
-        />
-        <TemperatureCardContainer
-          name='Quarto'
-          temp={-10.02}
-          mintemp={-15.7}
-          maxtemp={2}
-          unit='C'
-          conn={false}
-        />
-        <TemperatureCardContainer
-          name='Cozinha'
-          temp={25}
-          mintemp={22}
-          maxtemp={31}
-          unit='C'
-          conn={true}
-        />
-        <TemperatureCardContainer
-          name='Varanda'
-          temp={7}
-          mintemp={5}
-          maxtemp={12}
-          unit='C'
-          conn={true}
-        />
-      </Box>
-    </>
+    <Router>
+      <ProtectedRouter exact path='/' component={Dashaboard} />
+      <Route exact path='/login' component={Login} />
+    </Router>
   );
 };
 
