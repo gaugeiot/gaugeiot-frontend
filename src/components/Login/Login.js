@@ -49,8 +49,6 @@ const Login = () => {
     console.log('Fake authentication');
     if (email === 'gaugeiot' && password === 'gaugeiot') {
       dispatch({ type: 'AuthenticateUser' });
-      // setEmail('');
-      // setPassword('');
     }
   };
 
