@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { getState } from '../StateProvider/StateProvider';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -42,20 +43,28 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const authenticate = () => {
-    //TODO: get token from server
-    //TODO : save token in localstorage
-    //TODO : redirect to original page
-    //TODO: remove fake authentication
-    console.log('Fake authentication');
-    if (email === 'gaugeiot' && password === 'gaugeiot') {
-      dispatch({ type: 'AuthenticateUser' });
-    }
+    //get token from server
+    axios
+      .post('/api/auth')
+      .then(res => res.data)
+      .then(data => {
+        //check if error is returned form server
+        if (data.error) return;
+        //save token in session storage
+        sessionStorage.setItem('token', data.token);
+        // call reducer to authenticate user
+        dispatch({
+          type: 'AuthenticateUser',
+          payload: {
+            token: data.token
+          }
+        });
+      });
   };
 
   if (user.isAuthenticated) {
     return <Redirect to='/' />;
   }
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />

@@ -8,7 +8,8 @@ import { StateProvider } from './StateProvider/StateProvider';
 const App = () => {
   const initialState = {
     user: {
-      isAuthenticated: false
+      isAuthenticated: false,
+      token: ''
     }
   };
 
@@ -17,7 +18,11 @@ const App = () => {
       case 'AuthenticateUser':
         return {
           ...state,
-          user: { ...state.user, isAuthenticated: true }
+          user: {
+            ...state.user,
+            isAuthenticated: true,
+            token: action.payload.token
+          }
         };
       default:
         return state;

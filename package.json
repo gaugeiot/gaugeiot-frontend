@@ -2,6 +2,7 @@
   "name": "zeigor",
   "version": "1.0.0",
   "description": "Ze Igor Web Designer",
+  "proxy": " http://localhost:3000",
   "scripts": {
     "start": "webpack-dev-server --config build-utils/webpack.config.js --env.env=dev",
     "build": "webpack --config build-utils/webpack.config.js --env.env=prod",
