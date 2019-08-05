@@ -21,11 +21,6 @@ const verifyTokenValidation = async token => {
   }
 };
 
-
-const test = () =>{
-  return false;
-}
-
 //verifies if token saved in session storage is still valide and so it can
 // be used as the user token to make server api resquests
 const isSessionTokenValid = async () => {
@@ -34,11 +29,22 @@ const isSessionTokenValid = async () => {
   return false;
 };
 
+
+//gets a new token to authenticate current user
+const getNewToken = async() => {
+  //get token from server 
+  const response = await axios.post('/api/auth');
+  const token =  response.data.token;
+  //save token in session storage for future use
+  sessionStorage.setItem('token', token);
+  return token;
+}
+
 const exportedFunctions = {
   getSessionStorageToken,
   verifyTokenValidation,
   isSessionTokenValid,
-  test
+  getNewToken,
 };
 
 export default exportedFunctions;

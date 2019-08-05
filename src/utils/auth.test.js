@@ -21,8 +21,6 @@ describe('Auth', () => {
     axios.get.mockResolvedValue(resp);
 
     expect(await authUtils.verifyTokenValidation('token')).toBe(true);
-
-    // expect(getSessionStorageToken()).toBe(false);
   });
 
   it('should not validate token with server', async () => {
@@ -48,6 +46,8 @@ describe('Auth', () => {
     authUtils.verifyTokenValidation =  jest.fn().mockResolvedValue(true);
     expect(await authUtils.isSessionTokenValid()).toBe(true);
   });
+
+  //TODO: test authUtils.getNewToken
 
   
 });

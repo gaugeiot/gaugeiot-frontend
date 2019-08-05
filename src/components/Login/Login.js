@@ -14,7 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { getState } from '../StateProvider/StateProvider';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import authUtils from '../../utils/auth';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -44,26 +44,16 @@ const Login = () => {
 
   const authenticate = () => {
     //get token from server
-    axios
-      .post('/api/auth')
-      .then(res => res.data)
-      .then(data => {
-        //check if error is returned form server
-        if (data.error) return;
-        //save token in session storage
-        sessionStorage.setItem('token', data.token);
-        // call reducer to authenticate user
-        dispatch({
-          type: 'AuthenticateUser',
-          payload: {
-            token: data.token
-          }
-        });
+    authUtils.getNewToken().then(token=> {
+      dispatch({
+        type: 'AuthenticateUser',
+        payload: {
+          token: token
+        }
       });
+    });
   };
-
-
-
+  
   if (user.isAuthenticated) {
     return <Redirect to='/' />;
   }
