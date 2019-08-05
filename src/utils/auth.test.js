@@ -7,7 +7,6 @@ jest.mock('axios');
 describe('Auth', () => {
   it('should return token saved in session storage', () => {
     sessionStorage.setItem('token', 'token');
-
     expect(authUtils.getSessionStorageToken()).toBe('token');
   });
 

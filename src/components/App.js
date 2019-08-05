@@ -1,17 +1,42 @@
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import Dashaboard from './Dashboard/Dashboard';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import ProtectedRouter from './ProtectedRouter/ProtectedRouter';
 import Login from './Login/Login';
 import { StateProvider } from './StateProvider/StateProvider';
+import authUtils from '../utils/auth';
+
+const initInvalidToken = {
+  user: {
+    isAuthenticated: false,
+    token: ''
+  }
+};
+const initValidToken = {
+  user: {
+    isAuthenticated: true,
+    token: authUtils.getSessionStorageToken()
+  }
+};
+
 
 const App = () => {
-  const initialState = {
-    user: {
-      isAuthenticated: false,
-      token: ''
-    }
-  };
+  const [loadingToken, setLoadingToken] = useState(false);
+  const [initialState, setInitialState] = useState(initInvalidToken);
+ 
+
+  useEffect(()=>{
+    //check if there is a token still valid in the session storage
+    (async () => {
+      const tokenIsValid = await authUtils.isSessionTokenValid();
+      if(tokenIsValid) {
+        setInitialState(initValidToken);
+      }
+      setLoadingToken(true);
+    })();
+  },[]);
+
+  
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -28,13 +53,15 @@ const App = () => {
         return state;
     }
   };
+
   return (
-    <StateProvider initialState={initialState} reducer={reducer}>
+    loadingToken?
+    (<StateProvider initialState={initialState} reducer={reducer}>
       <Router>
         <ProtectedRouter exact path='/' component={Dashaboard} />
         <Route exact path='/login' component={Login} />
       </Router>
-    </StateProvider>
+    </StateProvider>) : null
   );
 };
 

@@ -15,7 +15,6 @@ import Container from '@material-ui/core/Container';
 import { getState } from '../StateProvider/StateProvider';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { isSessionTokenValid } from '../../utils/auth';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -63,11 +62,7 @@ const Login = () => {
       });
   };
 
-  //TODO : clean after test
-  const verifyToken = async () => {
-    let a = await isSessionTokenValid();
-    console.log(a);
-  };
+
 
   if (user.isAuthenticated) {
     return <Redirect to='/' />;
@@ -133,7 +128,7 @@ const Login = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href='#' variant='body2' onClick={verifyToken}>
+              <Link href='#' variant='body2'>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
