@@ -23,7 +23,7 @@ const TemperatureCardContainer = ({
   const saveCard = name => {
     if (name !== cardName && name !== '') {
       setCardName(name);
-      //TODO: sabe changes in database
+      //TODO: savechanges in database
     }
   };
 
