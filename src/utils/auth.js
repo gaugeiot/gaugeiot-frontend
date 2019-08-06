@@ -34,7 +34,7 @@ const getNewToken = async data => {
   try {
     const response = await axios.post('/api/auth', data);
     const msg = response.data.msg;
-    if (msg === 'user-not-registered') return false;
+    if (msg === 'user-not-registered' || msg === undefined) return false;
     else {
       //save token in session storage for future use
       sessionStorage.setItem('token', msg);
