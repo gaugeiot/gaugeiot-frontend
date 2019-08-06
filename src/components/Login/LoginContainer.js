@@ -4,8 +4,10 @@ import { Redirect } from 'react-router-dom';
 import authUtils from '../../utils/auth';
 import Login from './Login';
 
+
+
 const LoginContainer = () => {
-  const [{ user }, dispatch] = getState();
+  const [{ user }, dispatch] = getState();  
   const [error, setError] = useState(false);
 
   const authenticate = (email, password) => {
@@ -25,7 +27,7 @@ const LoginContainer = () => {
       }
     });
   };
-
+  
   if (user.isAuthenticated) {
     return <Redirect to='/' />;
   }
