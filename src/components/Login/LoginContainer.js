@@ -9,7 +9,6 @@ const LoginContainer = () => {
   const [error, setError] = useState(false);
 
   const authenticate = (email, password) => {
-    console.log(`${email}, ${password}`);
     //get token from server
     authUtils.getNewToken({ email, password }).then(status => {
       if (status === true) {
