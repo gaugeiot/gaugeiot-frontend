@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 //get token from session storage
 const getSessionStorageToken = () => {
   let token = sessionStorage.getItem('token');
@@ -29,22 +28,25 @@ const isSessionTokenValid = async () => {
   return false;
 };
 
-
 //gets a new token to authenticate current user
-const getNewToken = async() => {
-  //get token from server 
-  const response = await axios.post('/api/auth');
-  const token =  response.data.token;
-  //save token in session storage for future use
-  sessionStorage.setItem('token', token);
-  return token;
-}
+const getNewToken = async data => {
+  //get token from server
+  const response = await axios.post('/api/auth', data);
+  const msg = response.data.msg;
+  if (msg === 'user-not-registered') return false;
+  else {
+    //save token in session storage for future use
+    sessionStorage.setItem('token', msg);
+    return true;
+  }
+};
 
+//trick to enable test with jest framework
 const exportedFunctions = {
   getSessionStorageToken,
   verifyTokenValidation,
   isSessionTokenValid,
-  getNewToken,
+  getNewToken
 };
 
 export default exportedFunctions;

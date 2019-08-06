@@ -44,16 +44,21 @@ const Login = () => {
 
   const authenticate = () => {
     //get token from server
-    authUtils.getNewToken().then(token=> {
-      dispatch({
-        type: 'AuthenticateUser',
-        payload: {
-          token: token
-        }
-      });
+    authUtils.getNewToken({ email, password }).then(status => {
+      if (status === true) {
+        // if user was authenticaded, update, global state
+        dispatch({
+          type: 'AuthenticateUser',
+          payload: {
+            token: authUtils.getSessionStorageToken()
+          }
+        });
+      } else {
+        console.log('User not authenticate, please check email and password!');
+      }
     });
   };
-  
+
   if (user.isAuthenticated) {
     return <Redirect to='/' />;
   }
