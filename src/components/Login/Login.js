@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,9 +13,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { getState } from '../StateProvider/StateProvider';
-import { Redirect } from 'react-router-dom';
-import authUtils from '../../utils/auth';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,32 +34,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = () => {
+const Login = ({ onSubmit, ...others }) => {
   const classes = useStyles();
-  const [{ user }, dispatch] = getState();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const authenticate = () => {
-    //get token from server
-    authUtils.getNewToken({ email, password }).then(status => {
-      if (status === true) {
-        // if user was authenticaded, update, global state
-        dispatch({
-          type: 'AuthenticateUser',
-          payload: {
-            token: authUtils.getSessionStorageToken()
-          }
-        });
-      } else {
-        console.log('User not authenticate, please check email and password!');
-      }
-    });
+  const submit = event => {
+    event.preventDefault();
+    onSubmit(email, password);
   };
 
-  if (user.isAuthenticated) {
-    return <Redirect to='/' />;
-  }
+  //TODO: show a message when user provides wrong data
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -72,7 +56,7 @@ const Login = () => {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <Box className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={submit}>
           <TextField
             variant='outlined'
             margin='normal'
@@ -84,6 +68,7 @@ const Login = () => {
             autoComplete='email'
             autoFocus
             value={email}
+            error={others.error}
             onChange={e => {
               setEmail(e.target.value);
             }}
@@ -99,6 +84,7 @@ const Login = () => {
             id='password'
             autoComplete='current-password'
             value={password}
+            error={others.error}
             onChange={e => {
               setPassword(e.target.value);
             }}
@@ -108,11 +94,11 @@ const Login = () => {
             label='Remember me'
           />
           <Button
+            type='submit'
             fullWidth
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={authenticate}
           >
             Sign In
           </Button>
@@ -128,10 +114,14 @@ const Login = () => {
               </Link>
             </Grid>
           </Grid>
-        </Box>
+        </form>
       </div>
     </Container>
   );
+};
+
+Login.propTypes = {
+  onSubmit: PropTypes.func.isRequired
 };
 
 export default Login;
