@@ -31,13 +31,18 @@ const isSessionTokenValid = async () => {
 //gets a new token to authenticate current user
 const getNewToken = async data => {
   //get token from server
-  const response = await axios.post('/api/auth', data);
-  const msg = response.data.msg;
-  if (msg === 'user-not-registered') return false;
-  else {
-    //save token in session storage for future use
-    sessionStorage.setItem('token', msg);
-    return true;
+  try {
+    const response = await axios.post('/api/auth', data);
+    const msg = response.data.msg;
+    if (msg === 'user-not-registered') return false;
+    else {
+      //save token in session storage for future use
+      sessionStorage.setItem('token', msg);
+      return true;
+    }
+  } catch (err) {
+    console.log(err);
+    return false;
   }
 };
 
