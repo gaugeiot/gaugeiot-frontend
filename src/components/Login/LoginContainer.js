@@ -12,7 +12,7 @@ const LoginContainer = () => {
     //get token from server
     authUtils.getNewToken({ email, password }).then(status => {
       if (status === true) {
-        // if user was authenticaded, update, global state
+        // if user was authenticaded, update global state
         dispatch({
           type: 'AuthenticateUser',
           payload: {
