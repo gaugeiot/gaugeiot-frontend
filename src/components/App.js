@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Dashaboard from './Dashboard/Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import ProtectedRouter from './ProtectedRouter/ProtectedRouter';
 import LoginContainer from './Login/index';
@@ -53,7 +53,7 @@ const App = () => {
   return loadingToken ? (
     <StateProvider initialState={initialState} reducer={reducer}>
       <Router>
-        <ProtectedRouter exact path='/' component={Dashaboard} />
+        <ProtectedRouter exact path='/' component={Dashboard} />
         <Route exact path='/login' component={LoginContainer} />
       </Router>
     </StateProvider>

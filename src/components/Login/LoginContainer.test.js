@@ -1,16 +1,22 @@
 import 'regenerator-runtime'; // enable use of async/await in functions
-import React from 'react'
-import {render} from '@testing-library/react'
-import authUtils from '../../utils/auth';
-import { StateProvider, StateContextConsumer } from "../StateProvider/StateProvider";
+import React from 'react';
+import {render, cleanup} from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import TestingRouter from "../../__tests__/test-utils/TestingRouter";
+import { StateProvider} from "../StateProvider/StateProvider";
 import LoginContainer from "./LoginContainer";
 
-const  initialState = {
-  user: {
-    isAuthenticated: false,
-    token: ''
-  }
-};
+
+const getInitialState = (auth = false, token = "") => {
+  return( 
+    {
+      user: {
+        isAuthenticated: auth,
+        token: token
+      }
+    }
+  );
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,17 +34,35 @@ const reducer = (state, action) => {
   }
 };
 
+
+afterEach(cleanup);
+
 describe('LoginContainer', () => {
   it('should render Login component when user is not authenticated', () => {
-     //authUtils.getNewToken =  jest.fn().mockResolvedValue(false);
-   const {getAllByText} = render(<StateProvider initialState={initialState} reducer={reducer}>
-       <LoginContainer/>
-     </StateProvider>);
-    const { getByText } = render(<StateContextConsumer />);
-    console.log(getAllByText);
 
-    expect(true).toBe(true);
+    const {getByTestId} = render(
+        <StateProvider initialState={getInitialState()} reducer={reducer}>
+          <LoginContainer/>
+        </StateProvider>
+      );
+    expect(getByTestId('login-page')).toBeInTheDocument();
   });
 
-  //TODO : implement test for LoginContainer Component
+  it('should redirect when the user is authenticated', () => {
+    const redirectUrl = '/dashboard';
+
+    const { container} = render(
+        <StateProvider initialState={getInitialState(true,'')} reducer={reducer}>
+          <TestingRouter
+            ComponentWithRedirection={() => <LoginContainer redirectTo={redirectUrl} />}
+            RedirectUrl={redirectUrl}
+          />
+        </StateProvider>
+      );
+
+      expect(container.innerHTML).toEqual(
+        expect.stringContaining(redirectUrl)
+      );
+  });
+
 });

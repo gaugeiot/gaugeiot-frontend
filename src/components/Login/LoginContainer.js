@@ -6,7 +6,7 @@ import Login from './Login';
 
 
 
-const LoginContainer = () => {
+const LoginContainer = ({redirectTo = '/'}) => {
   const [{ user }, dispatch] = getState();  
   const [error, setError] = useState(false);
 
@@ -29,10 +29,13 @@ const LoginContainer = () => {
   };
   
   if (user.isAuthenticated) {
-    return <Redirect to='/' />;
+    return( 
+        <Redirect to={redirectTo} />
+    );
   }
 
-  return <Login onSubmit={authenticate} error={error} />;
+  return <Login onSubmit={authenticate} error={error} />
+
 };
 
 LoginContainer.propTypes = {};
