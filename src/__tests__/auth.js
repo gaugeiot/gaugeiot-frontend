@@ -1,5 +1,5 @@
 import 'regenerator-runtime'; // enable use of async/await in functions
-import authUtils from './auth';
+import authUtils from '../utils/auth';
 import axios from 'axios';
 
 jest.mock('axios');

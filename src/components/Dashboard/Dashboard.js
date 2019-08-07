@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import NavBar from '../NavBar/NavBar';
+import SideBar from "../SideBar/SideBar";
 import TemperatureCardContainer from '../TemperatureCard/index';
 
 const useStyles = makeStyles(theme => ({
@@ -12,9 +13,15 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+  const [openSideBar, setOpenSideBar] = useState(false); 
+  const toogleSideBar = (state) =>{
+    console.log(state)
+      setOpenSideBar(state);
+  }
   return (
     <div className={classes.dashboard}>
-      <NavBar />
+      <NavBar onMenuClick={toogleSideBar} menuState={openSideBar} />
+      <SideBar open={openSideBar} toogleSideBar={toogleSideBar}/>
       {/* <Box
         display='flex'
         flexWrap='wrap'
