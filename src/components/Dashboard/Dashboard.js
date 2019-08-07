@@ -15,7 +15,7 @@ const Dashboard = () => {
   return (
     <div className={classes.dashboard}>
       <NavBar />
-      <Box
+      {/* <Box
         display='flex'
         flexWrap='wrap'
         alignItems='flex-start'
@@ -78,7 +78,7 @@ const Dashboard = () => {
           unit='C'
           conn={true}
         />
-      </Box>
+      </Box> */}
     </div>
   );
 };

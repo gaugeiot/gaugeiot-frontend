@@ -1,4 +1,5 @@
 const reducer = (state, action) => {
+  console.log('called in test');
   switch (action.type) {
     case 'LOGIN':
       return {
