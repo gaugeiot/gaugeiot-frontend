@@ -22,7 +22,7 @@ const Dashboard = () => {
     <div className={classes.dashboard}>
       <NavBar onMenuClick={toogleSideBar} menuState={openSideBar} />
       <SideBar open={openSideBar} toogleSideBar={toogleSideBar}/>
-      {/* <Box
+      <Box
         display='flex'
         flexWrap='wrap'
         alignItems='flex-start'
@@ -85,7 +85,7 @@ const Dashboard = () => {
           unit='C'
           conn={true}
         />
-      </Box> */}
+      </Box>
     </div>
   );
 };
