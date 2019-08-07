@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Dashboard from './Dashboard/Dashboard';
 import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import ProtectedRouter from './ProtectedRouter/ProtectedRouter';
@@ -45,18 +46,33 @@ const App = () => {
             token: action.payload.token
           }
         };
+      case 'LOGOUT':
+        // remove token from session storage
+        sessionStorage.removeItem('token');
+        // update global state
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            isAuthenticated: false,
+            token: ''
+          }
+        };
       default:
         return state;
     }
   };
 
   return loadingToken ? (
-    <StateProvider initialState={initialState} reducer={reducer}>
-      <Router>
-        <ProtectedRouter exact path='/' component={Dashboard} />
-        <Route exact path='/login' component={LoginContainer} />
-      </Router>
-    </StateProvider>
+    <>
+      <CssBaseline />
+      <StateProvider initialState={initialState} reducer={reducer}>
+        <Router>
+          <ProtectedRouter exact path='/' component={Dashboard} />
+          <Route exact path='/login' component={LoginContainer} />
+        </Router>
+      </StateProvider>
+    </>
   ) : null;
 };
 
