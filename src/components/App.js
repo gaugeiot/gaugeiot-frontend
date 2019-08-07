@@ -36,7 +36,7 @@ const App = () => {
   return loadingToken ? (
     <>
       <CssBaseline />
-      <StateProvider initialState={initialState} >
+      <StateProvider initialState={initialState}>
         <StateContext.Consumer>
           {([state,dispatch]) =>
            (state.user.isAuthenticated? <Dashboard/>:

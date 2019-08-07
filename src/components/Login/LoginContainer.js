@@ -15,7 +15,7 @@ const LoginContainer = ({redirectTo = '/'}) => {
       if (status === true) {
         // if user was authenticaded, update global state
         dispatch({
-          type: 'AuthenticateUser',
+          type: 'LOGIN',
           payload: {
             token: authUtils.getSessionStorageToken()
           }
