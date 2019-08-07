@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { getState } from '../StateProvider/StateProvider';
-import { Redirect } from 'react-router-dom';
 import authUtils from '../../utils/auth';
 import Login from './Login';
 
@@ -27,12 +26,6 @@ const LoginContainer = ({redirectTo = '/'}) => {
       }
     });
   };
-  
-  if (user.isAuthenticated) {
-    return( 
-        <Redirect to={redirectTo} />
-    );
-  }
 
   return <Login onSubmit={authenticate} error={error} />
 
