@@ -60,9 +60,9 @@ export default function SideBar({open,toogleSideBar}) {
             </ListItem>
           </List>
           <List> 
-            <ListItem button key='Devices'>
+            <ListItem button key='New Device'>
               <ListItemIcon><SettingsRemote/></ListItemIcon>
-              <ListItemText primary='Devices' />
+              <ListItemText primary='New Device' />
             </ListItem>
           </List>
        </div>
