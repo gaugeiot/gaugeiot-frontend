@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NavBar = ({onMenuClick, menuState}) => {
+const NavBar = ({ onMenuClick, menuState }) => {
   const classes = useStyles();
   const [, dispatch] = getState();
 
@@ -36,7 +36,7 @@ const NavBar = ({onMenuClick, menuState}) => {
           className={classes.menuButton}
           color='inherit'
           aria-label='menu'
-          onClick={()=>onMenuClick(!menuState)}
+          onClick={() => onMenuClick(!menuState)}
         >
           <MenuIcon />
         </IconButton>
