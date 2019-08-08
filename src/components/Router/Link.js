@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RouterContext } from './Router';
+import { RouterConsumer} from './Router';
 
 const Link = ({ to, children }) => {
   const changeRoute = dispatch => {
     dispatch({ type: 'GOTO', payload: to });
   };
   return (
-    <RouterContext.Consumer>
-      {([state, dispatch]) => {
+    <RouterConsumer>
+      {(state, dispatch) => {
         return <div onClick={() => changeRoute(dispatch)}>{children}</div>;
       }}
-    </RouterContext.Consumer>
+    </RouterConsumer>
   );
 };
 

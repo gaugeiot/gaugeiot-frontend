@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RouterContext } from './Router';
+import { RouterConsumer} from './Router';
 
 const Route = ({ path, component }) => {
-  return (
-    <RouterContext.Consumer>
-      {([state, dispatch]) => {
+  return(
+    <RouterConsumer>
+      {(state,dispatch) => {
         if (path === state.route) return component;
         else return;
       }}
-    </RouterContext.Consumer>
+    </RouterConsumer>
   );
 };
 

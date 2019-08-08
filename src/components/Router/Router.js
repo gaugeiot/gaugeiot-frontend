@@ -22,18 +22,18 @@ const Router = ({ children }) => (
   </RouterContext.Provider>
 );
 
-// const RouterConsumer = ({children})=>(
-//   <RouterContext.Consumer>
-//     {([sate, dispatch]) =>  }
-//   </RouterContext.Consumer>
-// );
+const RouterConsumer = ({children})=>(
+  <RouterContext.Consumer>
+    {([state, dispatch]) => children(state,dispatch) }
+  </RouterContext.Consumer>
+);
 
-// RouterConsumer.propTypes = {
-//   children: PropTypes.node.isRequired
-// };
+RouterConsumer.propTypes = {
+  children: PropTypes.func.isRequired
+};
 
 Router.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-export { Router as default, RouterContext };
+export { Router as default, RouterConsumer };
