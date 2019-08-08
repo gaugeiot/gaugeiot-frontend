@@ -12,26 +12,38 @@ import Container  from '@material-ui/core/Container';
 import Button  from '@material-ui/core/Button';
 
 const AddDevice = props => {
+
+  const submit = event => {
+    event.preventDefault();
+    console.log('Add device submited!');
+    // onSubmit(email, password);
+  }
+
   return (
     <Container maxWidth="md">
+    <form onSubmit={submit}>
+    
     <TextField
         id="standard-full-width"
         label="Device Name"
         fullWidth
         margin="normal"
+        required
       />
       <TextField
         id="standard-full-width"
         label="Device Location"
         fullWidth
         margin="normal"
+        required
       />
       <TextField
         id="standard-full-width"
         label="MAC Address"
         fullWidth
         margin="normal"
-        placeholder="0000-0000-0000-0000"
+        placeholder="00:00:00:00:00:00"
+        required
       />
       <FormControl fullWidth margin="normal" >
         <InputLabel shrink htmlFor="age-label-placeholder">
@@ -67,6 +79,7 @@ const AddDevice = props => {
         </Select>
       </FormControl>
       <Button
+            type="submit"
             variant='contained'
             size='medium'
             fullWidth
@@ -81,6 +94,7 @@ const AddDevice = props => {
       >
             Add New Device
       </Button>
+      </form>
     </Container>
   );
 };
