@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { Router, Route} from './Router/index';
+import { StateProvider, StateContext } from './StateProvider/StateProvider';
 import Dashboard from './Dashboard/Dashboard';
 import LoginContainer from './Login/index';
-import { StateProvider, StateContext } from './StateProvider/StateProvider';
 import authUtils from '../utils/auth';
+import SignUp from './SignUp/SignUp';
 
 const initInvalidToken = {
   user: {
@@ -34,17 +36,18 @@ const App = () => {
   }, []);
 
   return loadingToken ? (
-    <>
+    <Router>
       <CssBaseline />
       <StateProvider initialState={initialState}>
         <StateContext.Consumer>
           {([state,dispatch]) =>
-           (state.user.isAuthenticated? <Dashboard/>:
-           <LoginContainer/>)
+           (state.user.isAuthenticated === false? <Dashboard/>:
+           <Route path='/signin' component={<LoginContainer/>}/>)
           }
         </StateContext.Consumer>
       </StateProvider>
-    </>
+      <Route path='/signup' component={<SignUp />}/>
+    </Router>
   ) : null;
 };
 

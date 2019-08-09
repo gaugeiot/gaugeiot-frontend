@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Router, Route, Link } from '../Router/index';
+import {Route } from '../Router/index';
 import NavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
 import DashboardEx from './DashboardEx';
@@ -23,13 +23,13 @@ const Dashboard = () => {
   };
   return (
     <div className={classes.dashboard}>
-      <Router>
+      <>
         <NavBar onMenuClick={toogleSideBar} menuState={openSideBar} />
         <SideBar open={openSideBar} toogleSideBar={toogleSideBar} />
         <Route path='/' component={<DashboardEx />} />
         <Route path='/dashboard' component={<DashboardEx />} />
         <Route path='/add-device' component={<AddDevice />} />
-      </Router>
+      </>
     </div>
   );
 };

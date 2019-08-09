@@ -1,5 +1,5 @@
 import Router, { RouterConsumer } from './Router';
 import Route from './Route';
-import Link from './Link';
+import RouteLink from './RouteLink';
 
-export { Router, RouterConsumer, Route, Link };
+export { Router, RouterConsumer, Route, RouteLink };

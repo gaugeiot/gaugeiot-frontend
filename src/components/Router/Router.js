@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const RouterContext = createContext();
 
 const initialState = {
-  route: '/add-device'
+  route: '/signup'
 };
 
 const routerReducer = (state, action) => {

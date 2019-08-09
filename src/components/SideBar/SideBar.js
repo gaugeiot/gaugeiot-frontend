@@ -7,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SettingsRemote from '@material-ui/icons/SettingsRemote';
 import Dashboard from '@material-ui/icons/Dashboard';
-import { Link } from '../Router/index';
+import { RouteLink } from '../Router/index';
 
 const useStyles = makeStyles({
   list: {
@@ -35,24 +35,24 @@ export default function SideBar({ open, toogleSideBar }) {
           onKeyDown={() => toogleSideBar(false)}
         >
           <List>
-            <Link to='/dashboard'>
+            <RouteLink to='/dashboard'>
               <ListItem button key='Dashboard'>
                 <ListItemIcon>
                   <Dashboard />
                 </ListItemIcon>
                 <ListItemText primary='Dashboard' />
               </ListItem>
-            </Link>
+            </RouteLink>
           </List>
           <List>
-            <Link to='/add-device'>
+            <RouteLink to='/add-device'>
               <ListItem button key='New Device'>
                 <ListItemIcon>
                   <SettingsRemote />
                 </ListItemIcon>
                 <ListItemText primary='New Device' />
               </ListItem>
-            </Link>
+            </RouteLink>
           </List>
         </div>
       </SwipeableDrawer>

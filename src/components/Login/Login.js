@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -8,13 +9,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { RouteLink} from '../Router/index';
+import { GuageIotVersion } from "../Utils/Utils";
 
 const useStyles = makeStyles(theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -109,13 +116,18 @@ const Login = ({ onSubmit, ...others }) => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='#' variant='body2'>
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <RouteLink to='/signup'>
+                  <Link href='#' variant='body2'>
+                      {"Don't have an account? Sign Up"}
+                  </Link>
+                </RouteLink>
               </Grid>
             </Grid>
           </form>
         </div>
+        <Box mt={5}>
+        <GuageIotVersion />
+      </Box>
       </Container>
     );
 };
