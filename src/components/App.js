@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Router, Route} from './Router/index';
+import { Router, Route } from './Router/index';
 import { StateProvider, StateContext } from './StateProvider/StateProvider';
 import Dashboard from './Dashboard/Dashboard';
 import LoginContainer from './Login/index';
@@ -46,7 +46,7 @@ const App = () => {
           }
         </StateContext.Consumer>
       </StateProvider>
-      <Route path='/signup' component={<SignUp />}/>
+      <Route path='/signup' component={<SignUp />} />
     </Router>
   ) : null;
 };
