@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { RouterConsumer } from './Router';
 
 const RedirectRoute = ({ to }) => {
-  //TODO: remove log
-  console.log('asdasdasdasdasdasda');
   return (
     <RouterConsumer>
       {(state, dispatch) => dispatch({ type: 'GOTO', payload: to })}

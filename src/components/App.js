@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Router, Route, RedirectRoute } from './Router/index';
+import { Router, Route } from './Router/index';
 import { StateProvider, StateContext } from './StateProvider/StateProvider';
 import Dashboard from './Dashboard/Dashboard';
 import LoginContainer from './Login/index';
 import authUtils from '../utils/auth';
 import SignUp from './SignUp/SignUp';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 
 const initInvalidToken = {
   user: {
@@ -39,15 +40,8 @@ const App = () => {
     <Router>
       <CssBaseline />
       <StateProvider initialState={initialState}>
-        <StateContext.Consumer>
-          {([state, dispatch]) =>
-            state.user.isAuthenticated == false ? (
-              <Dashboard />
-            ) : (
-              <Route path='/signin' component={<LoginContainer />} />
-            )
-          }
-        </StateContext.Consumer>
+        {/* <Dashboard /> */}
+        <ProtectedRoute path='/' Component={Dashboard} />
         <Route path='/signup' component={<SignUp />} />
         <Route path='/signin' component={<LoginContainer />} />
       </StateProvider>

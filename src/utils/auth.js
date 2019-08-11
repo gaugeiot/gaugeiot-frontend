@@ -32,7 +32,7 @@ const isSessionTokenValid = async () => {
 const getNewToken = async data => {
   //get token from server
   try {
-    const response = await axios.post('/api/auth', data);
+    const response = await axios.post('/api/auth/signin', data);
     const msg = response.data.msg;
     if (msg === 'user-not-registered' || msg === undefined) return false;
     else {
