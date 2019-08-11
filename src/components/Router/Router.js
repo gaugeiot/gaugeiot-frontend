@@ -8,6 +8,9 @@ const initialState = {
 };
 
 const routerReducer = (state, action) => {
+  //TODO: remove log
+  console.log('called');
+
   switch (action.type) {
     case 'GOTO':
       return { ...state, route: action.payload };
@@ -22,9 +25,9 @@ const Router = ({ children }) => (
   </RouterContext.Provider>
 );
 
-const RouterConsumer = ({children})=>(
+const RouterConsumer = ({ children }) => (
   <RouterContext.Consumer>
-    {([state, dispatch]) => children(state,dispatch) }
+    {([state, dispatch]) => children(state, dispatch)}
   </RouterContext.Consumer>
 );
 

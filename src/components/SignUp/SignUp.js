@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { RouteLink } from '../Router/index';
+import { RouteLink, RedirectRoute } from '../Router/index';
 import { GuageIotVersion } from '../Utils/Utils';
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +45,7 @@ const SignUp = () => {
   const [password, setPassword] = useState(''); //Form password input
   const [firstName, setFirstName] = useState(''); //Form firtName input
   const [lastName, setLastName] = useState(''); //Form lastName input
+  const [accountCreated, setAccountCreated] = useState(false); // if account was successfully created it is setted true
 
   // handles the form submit
   const submitHandler = e => {
@@ -59,7 +60,10 @@ const SignUp = () => {
     // if the user wants to receive a new verification email.
 
     // TODO: Redirects to the successful registration page
+    setAccountCreated(true);
   };
+
+  if (accountCreated) return <RedirectRoute to='/signin' />;
 
   return (
     <Container component='main' maxWidth='xs'>
