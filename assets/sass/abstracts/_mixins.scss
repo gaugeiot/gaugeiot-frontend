@@ -1,0 +1,67 @@
+@mixin clearfix {
+  &::after{
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin center_horizontal_vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+/*
+// MEDIA QUERY MANAGER
+// breakpoint argument choice
+- bp-largest: 62.5em;         // 1000px
+- bp-large: 50em;             // 800px
+- bp-medium-700: 43.75em;     // 700px
+- bp-meidum-600: 37.5em;      // 600px
+- bp-small: 31.25em;         // 500px
+- bp-smallest: 25em;         // 400px
+
+Order : Base + typography > general layout + grid > components
+
+1em = 16px
+*/
+
+
+
+@mixin respond($breakpoint) {
+
+  @if($breakpoint == 'bp-smallest') {
+    @media only screen and (max-width: 25em ) { @content }; // (400px/16px)*1em
+  }
+
+  @if($breakpoint == 'bp-small') {
+    @media only screen and (max-width: 31.25em ) { @content }; // (500px/16px)*1em
+  }
+
+  @if($breakpoint == 'bp-medium-600') {
+    @media only screen and (max-width: 37.5em ) { @content }; // (600px/16px)*1em
+  }
+
+  @if($breakpoint == 'bp-medium-700') {
+    @media only screen and (max-width: 43.75em ) { @content }; // (700px/16px)*1em
+  }
+
+  @if($breakpoint == 'bp-large') {
+    @media only screen and (max-width: 50em ) { @content }; // (800px/16px)*1em
+  }
+}
+
+/*
+// device type argument choice
+- smartphone
+*/
+
+@mixin deviceType($device) {
+
+  @if($device == smartphone) {
+    @media only screen and (hover: none) { @content }; 
+  }
+}

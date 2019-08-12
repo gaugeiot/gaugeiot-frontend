@@ -1,0 +1,99 @@
+.skill__group {
+    margin: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    & > p {
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+}
+
+.skill {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  &__tag {
+    flex-basis: 20%;
+    
+    display: flex;
+    justify-content: flex-start;
+
+    @include respond(bp-large) {
+      flex-basis: 25%;
+    }
+
+    @include respond(bp-small) {
+      flex-basis: 25%;
+    }
+  }
+
+  &__level {
+    flex: 1;
+    height: 2.5rem;
+    border-radius: 4rem;
+    position: relative;
+  }
+
+  &__popup {
+    position: absolute;
+    background-image: linear-gradient(to bottom right, $color-primary-dark, $color-primary ); 
+    width: 100%;
+    height: auto;
+    max-height: 0;
+    color: $color-white;
+    border-radius: 10px;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%,0);
+    opacity: 0;
+    z-index: -10;
+    transition: all 0.7s; // note that we're transitioning max-height, not height!
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    & ul{
+      list-style: none;
+      width: 100%;
+      padding: 0.5rem 0.5rem;
+    }
+
+    &-item:link,
+    &-item:hover,
+    &-item:visited,
+    &-item:active {
+      display: inline-block;
+      width: 100%;
+      text-decoration: none;
+      color: inherit;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.5s;
+    }
+
+    &-item:hover,
+    &-item:active {
+      color: $color-primary;
+      background-color: $color-white;
+    }
+
+  }
+
+  &__level:hover &__popup,
+  &__popup:hover {
+    opacity: 1;
+    z-index: 10;
+    max-height: 15rem; // note that we're transitioning max-height, not height!
+  }
+
+
+}
