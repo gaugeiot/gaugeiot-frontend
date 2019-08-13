@@ -41,9 +41,9 @@ const App = () => {
       <CssBaseline />
       <StateProvider initialState={initialState}>
         {/* <Dashboard /> */}
-        <ProtectedRoute path='/' Component={Dashboard} />
+        {/* <ProtectedRoute path='/' Component={Dashboard} /> */}
+        {/* <Route path='/signin' component={<LoginContainer />} /> */}
         <Route path='/signup' component={<SignUp />} />
-        <Route path='/signin' component={<LoginContainer />} />
       </StateProvider>
     </Router>
   ) : null;

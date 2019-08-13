@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -67,7 +67,6 @@ const SignUp = () => {
 
   return (
     <Container component='main' maxWidth='xs'>
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -80,6 +79,7 @@ const SignUp = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 required
+                margin='dense'
                 autoComplete='fname'
                 name='firstName'
                 variant='outlined'
@@ -94,6 +94,7 @@ const SignUp = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 required
+                margin='dense'
                 variant='outlined'
                 required
                 fullWidth
@@ -107,6 +108,7 @@ const SignUp = () => {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
+                margin='dense'
                 required
                 fullWidth
                 id='email'
@@ -120,12 +122,27 @@ const SignUp = () => {
             <Grid item xs={12}>
               <TextField
                 variant='outlined'
+                margin='dense'
                 required
                 fullWidth
                 name='password'
                 label='Password'
                 type='password'
                 id='password'
+                autoComplete='current-password'
+                onChange={e => setPassword(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                margin='dense'
+                required
+                fullWidth
+                name='confirm-password'
+                label='Confirm Password'
+                type='password'
+                id='confirm-password'
                 autoComplete='current-password'
                 onChange={e => setPassword(e.target.value)}
               />
