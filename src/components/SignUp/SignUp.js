@@ -61,7 +61,7 @@ const SignUp = () => {
 
   // states related to modals
   const [openResetPswdModal, setOpenResetPswdModal] = useState(false);
-  const [openVerificationEmail, setOpenVerificationEmail] = useState(true);
+  const [openVerificationEmail, setOpenVerificationEmail] = useState(false);
   
   // handles the form submit
   const submitHandler = e => {

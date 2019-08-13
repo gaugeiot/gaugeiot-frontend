@@ -30,7 +30,7 @@ const VerificationEmailModal = ({open, onClose, email}) =>{
             {
               sendVerificationEmail? <span>A verification email was sent to <b>{email}</b> !</span>
               : <span>This email is already associated with an account.<br/>
-                In order to login into you account you have to verify you email!</span>
+                In order to login into your account you have to verify your email!</span>
             }
           </DialogContentText>
         </DialogContent>
