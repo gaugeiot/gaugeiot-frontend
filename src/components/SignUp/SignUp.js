@@ -40,18 +40,63 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = () => {
   const classes = useStyles();
+  const initialErros = {
+    password: {
+      status: false,
+      msg: ''
+    }
+  };
 
   const [email, setEmail] = useState(''); //Form email input
   const [password, setPassword] = useState(''); //Form password input
+  const [confirmPassword, setConfirmPassword] = useState(''); //Form confirm password input
   const [firstName, setFirstName] = useState(''); //Form firtName input
   const [lastName, setLastName] = useState(''); //Form lastName input
   const [accountCreated, setAccountCreated] = useState(false); // if account was successfully created it is setted true
-
+  const [errors, setErrors] = useState(initialErros);
   // handles the form submit
   const submitHandler = e => {
     e.preventDefault();
     console.log('form submited!');
-    console.log(firstName + ' ' + lastName + ' ,' + email + ' ,' + password);
+    console.log(
+      firstName +
+        ' ' +
+        lastName +
+        ' ,' +
+        email +
+        ' ,' +
+        password +
+        ',' +
+        confirmPassword
+    );
+    // Reset errors
+    setErrors(initialErros);
+    // Checks if both passwords provided are equal
+    if (password !== confirmPassword) {
+      setErrors({
+        ...errors,
+        password: {
+          ...errors.password,
+          status: true,
+          msg: "Passwords don't match!"
+        }
+      });
+      return;
+    }
+
+    // password should have at least 6 characters
+    if (password.length < 6) {
+      setErrors({
+        ...errors,
+        password: {
+          ...errors.password,
+          status: true,
+          msg: 'Password should have at least 6 characters!'
+        }
+      });
+      return;
+    }
+
     // TODO: Register the new user in the database
     // TODO: If the email is already registered we can have two situations below:
     // TODO: 1 - The user is already verified. In this case a popup should appear asking
@@ -60,10 +105,10 @@ const SignUp = () => {
     // if the user wants to receive a new verification email.
 
     // TODO: Redirects to the successful registration page
-    setAccountCreated(true);
+    //setAccountCreated(true);
   };
 
-  if (accountCreated) return <RedirectRoute to='/signin' />;
+  // if (accountCreated) return <RedirectRoute to='/signin' />;
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -121,6 +166,8 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={errors.password.status}
+                helperText={errors.password.status && errors.password.msg}
                 variant='outlined'
                 margin='dense'
                 required
@@ -135,6 +182,8 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                error={errors.password.status}
+                helperText={errors.password.status && errors.password.msg}
                 variant='outlined'
                 margin='dense'
                 required
@@ -144,7 +193,7 @@ const SignUp = () => {
                 type='password'
                 id='confirm-password'
                 autoComplete='current-password'
-                onChange={e => setPassword(e.target.value)}
+                onChange={e => setConfirmPassword(e.target.value)}
               />
             </Grid>
           </Grid>
