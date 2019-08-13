@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -10,8 +9,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+
+// Internal Components
 import { RouteLink, RedirectRoute } from '../Router/index';
 import { GuageIotVersion } from '../Utils/Utils';
+import ResetPasswordModal from "./ResetPasswordModal";
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -54,6 +57,10 @@ const SignUp = () => {
   const [lastName, setLastName] = useState(''); //Form lastName input
   const [accountCreated, setAccountCreated] = useState(false); // if account was successfully created it is setted true
   const [errors, setErrors] = useState(initialErros);
+
+  // states related to modals
+  const [openResetPswdModal, setOpenResetPswdModal] = useState(true);
+  
   // handles the form submit
   const submitHandler = e => {
     e.preventDefault();
@@ -83,7 +90,6 @@ const SignUp = () => {
       });
       return;
     }
-
     // password should have at least 6 characters
     if (password.length < 6) {
       setErrors({
@@ -108,10 +114,13 @@ const SignUp = () => {
     //setAccountCreated(true);
   };
 
+
+
   // if (accountCreated) return <RedirectRoute to='/signin' />;
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <>
+    <Container component='main' maxWidth='md'>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -221,6 +230,13 @@ const SignUp = () => {
         <GuageIotVersion />
       </Box>
     </Container>
+
+    {/* Modals */}
+    <ResetPasswordModal 
+      open={openResetPswdModal} 
+      onClose={()=>setOpenResetPswdModal(false)}
+      email={email}/>
+    </>
   );
 };
 
