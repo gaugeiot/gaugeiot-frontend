@@ -7,14 +7,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 
-const ResetPasswordModal = ({open, onClose, email}) =>{
-  const [sendResetPswdEmail, setSendResetPswdEmail] = useState(false);
+const VerificationEmailModal = ({open, onClose, email}) =>{
+  const [sendVerificationEmail, setSendVerificationEmail] = useState(false);
 
-  const sendResetPasswordEmail = () => {
-    setSendResetPswdEmail(true);
+  const sendVerificationEmailHandle = () => {
+    setSendVerificationEmail(true);
     // send email here
     // TODO: Remove log
-    console.log('call the api to send a reset password email to the user!');
+    console.log('call the api to send a verification email to the user!');
     // TODO: Redirect to login
   }
 
@@ -28,15 +28,15 @@ const ResetPasswordModal = ({open, onClose, email}) =>{
         <DialogContent>
           <DialogContentText  id="alert-dialog-description">
             {
-              sendResetPswdEmail? <span>An email to reset your password was sent to <b>{email}</b> !</span>
-              : <span>This email is already associated with an active account.<br/>
-                If you don't remember your password, please click in the button bellow!</span>
+              sendVerificationEmail? <span>A verification email was sent to <b>{email}</b> !</span>
+              : <span>This email is already associated with an account.<br/>
+                In order to login into you account you have to verify you email!</span>
             }
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={sendResetPswdEmail? onClose : sendResetPasswordEmail} color="primary">
-            {sendResetPswdEmail?"Close":"Reset Password"}
+          <Button onClick={sendVerificationEmail? onClose : sendVerificationEmailHandle} color="primary">
+            {sendVerificationEmail?"Close":"Send Verification Email"}
           </Button>
         </DialogActions>
       </Dialog>
@@ -44,4 +44,4 @@ const ResetPasswordModal = ({open, onClose, email}) =>{
   );
 };
 
-export default ResetPasswordModal;
+export default VerificationEmailModal;

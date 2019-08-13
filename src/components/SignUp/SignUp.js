@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import { RouteLink, RedirectRoute } from '../Router/index';
 import { GuageIotVersion } from '../Utils/Utils';
 import ResetPasswordModal from "./ResetPasswordModal";
+import VerificationEmailModal from "./VerificationEmailModal";
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -59,7 +60,8 @@ const SignUp = () => {
   const [errors, setErrors] = useState(initialErros);
 
   // states related to modals
-  const [openResetPswdModal, setOpenResetPswdModal] = useState(true);
+  const [openResetPswdModal, setOpenResetPswdModal] = useState(false);
+  const [openVerificationEmail, setOpenVerificationEmail] = useState(true);
   
   // handles the form submit
   const submitHandler = e => {
@@ -235,6 +237,11 @@ const SignUp = () => {
     <ResetPasswordModal 
       open={openResetPswdModal} 
       onClose={()=>setOpenResetPswdModal(false)}
+      email={email}/>
+
+    <VerificationEmailModal 
+      open={openVerificationEmail} 
+      onClose={()=>setOpenVerificationEmail(false)}
       email={email}/>
     </>
   );
