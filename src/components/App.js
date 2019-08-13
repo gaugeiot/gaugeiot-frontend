@@ -42,7 +42,7 @@ const App = () => {
       <StateProvider initialState={initialState}>
         {/* <Dashboard /> */}
         {/* <ProtectedRoute path='/' Component={Dashboard} /> */}
-        {/* <Route path='/signin' component={<LoginContainer />} /> */}
+        <Route path='/signin' component={<LoginContainer />} />
         <Route path='/signup' component={<SignUp />} />
       </StateProvider>
     </Router>

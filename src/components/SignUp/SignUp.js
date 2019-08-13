@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -104,8 +105,36 @@ const SignUp = () => {
       });
       return;
     }
+    // Register the new user in the database
+     axios.post('/api/auth/signup', {
+       email,
+       password,
+       firstName,
+       lastName
+     })
+    .then(res => {
+      let data =  res.data;
+      let code = data.code;
+      let msg = data.msg;
+       
+      // Checks if account exist and email wasn't verified
+      // The email account was not verified. In this case a popup should appear asking
+      // if the user wants to receive a new verification email.
+      if(code === 0 ){
+        setOpenVerificationEmail(true);        
+        return;
+      }
 
-    // TODO: Register the new user in the database
+      // Checks if account exist and email was veirified
+      // The email is already verified. In this case a popup should appear asking
+      // if the user wants to login or recovery its password
+       if(code === 1 ){
+        setOpenResetPswdModal(true);
+         return;
+       }
+
+      }).catch(err => console.log(err));
+
     // TODO: If the email is already registered we can have two situations below:
     // TODO: 1 - The user is already verified. In this case a popup should appear asking
     // if the user wants to login of recovery its password
@@ -118,7 +147,7 @@ const SignUp = () => {
 
 
 
-  // if (accountCreated) return <RedirectRoute to='/signin' />;
+  //if (accountCreated) return <RedirectRoute to='/signin' />;
 
   return (
     <>
