@@ -16,7 +16,8 @@ import Container from '@material-ui/core/Container';
 import { RouteLink, RedirectRoute } from '../Router/index';
 import { GuageIotVersion } from '../Utils/Utils';
 import ResetPasswordModal from "./ResetPasswordModal";
-import VerificationEmailModal from "./VerificationEmailModal";
+import AccountExistModal from "./AccountExistModal";
+import AccountCreatedModal from "./AccountCreatedModal";
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -63,6 +64,7 @@ const SignUp = () => {
   // states related to modals
   const [openResetPswdModal, setOpenResetPswdModal] = useState(false);
   const [openVerificationEmail, setOpenVerificationEmail] = useState(false);
+  const [openAccountCreatedModal, setOpenAccountCreatedModal] = useState(true);
   
   // handles the form submit
   const submitHandler = e => {
@@ -128,20 +130,14 @@ const SignUp = () => {
       // Checks if account exist and email was veirified
       // The email is already verified. In this case a popup should appear asking
       // if the user wants to login or recovery its password
-       if(code === 1 ){
+      if(code === 1 ){
         setOpenResetPswdModal(true);
          return;
-       }
+      }
 
       }).catch(err => console.log(err));
-
-    // TODO: If the email is already registered we can have two situations below:
-    // TODO: 1 - The user is already verified. In this case a popup should appear asking
-    // if the user wants to login of recovery its password
-    // TODO: 2 - The user account was not verified. In this case a popup should appear asking
-    // if the user wants to receive a new verification email.
-
-    // TODO: Redirects to the successful registration page
+    
+      // TODO: Redirects to the successful registration page
     //setAccountCreated(true);
   };
 
@@ -268,11 +264,20 @@ const SignUp = () => {
       onClose={()=>setOpenResetPswdModal(false)}
       email={email}/>
 
-    <VerificationEmailModal 
+    <AccountExistModal 
       open={openVerificationEmail} 
       onClose={()=>setOpenVerificationEmail(false)}
       email={email}/>
+
+    <AccountCreatedModal 
+      open={openAccountCreatedModal} 
+      onClose={()=>setOpenAccountCreatedModal(false)}
+      email={email}
+    />
+
     </>
+
+    
   );
 };
 

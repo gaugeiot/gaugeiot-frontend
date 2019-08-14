@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 
-const VerificationEmailModal = ({open, onClose, email}) =>{
+const AccountExistModal = ({open, onClose, email}) =>{
   const [sendVerificationEmail, setSendVerificationEmail] = useState(false);
 
   const sendVerificationEmailHandle = () => {
@@ -44,4 +44,4 @@ const VerificationEmailModal = ({open, onClose, email}) =>{
   );
 };
 
-export default VerificationEmailModal;
+export default AccountExistModal;
