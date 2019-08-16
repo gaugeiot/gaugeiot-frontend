@@ -44,6 +44,7 @@ const App = () => {
         {/* <ProtectedRoute path='/' Component={Dashboard} /> */}
         <Route path='/signin' component={<LoginContainer />} />
         <Route path='/signup' component={<SignUp />} />
+        {/* <Dashboard /> */}
       </StateProvider>
     </Router>
   ) : null;
