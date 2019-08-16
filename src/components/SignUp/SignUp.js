@@ -264,26 +264,32 @@ const SignUp = () => {
       </Container>
 
       {/* Modals */}
-      <ResetPasswordModal
-        open={openResetPswdModal}
-        onClose={() => setOpenResetPswdModal(false)}
-        email={email}
-      />
+      {openResetPswdModal && (
+        <ResetPasswordModal
+          open={openResetPswdModal}
+          onClose={() => setOpenResetPswdModal(false)}
+          email={email}
+        />
+      )}
 
-      <AccountExistModal
-        open={openVerificationEmail}
-        onClose={() => setOpenVerificationEmail(false)}
-        email={email}
-      />
+      {openVerificationEmail && (
+        <AccountExistModal
+          open={openVerificationEmail}
+          onClose={() => setOpenVerificationEmail(false)}
+          email={email}
+        />
+      )}
 
-      <AccountCreatedModal
-        open={openAccountCreatedModal}
-        onClose={() => {
-          setOpenAccountCreatedModal(false);
-          setAccountCreated(true);
-        }}
-        email={email}
-      />
+      {openAccountCreatedModal && (
+        <AccountCreatedModal
+          open={openAccountCreatedModal}
+          onClose={() => {
+            setOpenAccountCreatedModal(false);
+            setAccountCreated(true);
+          }}
+          email={email}
+        />
+      )}
     </>
   );
 };
